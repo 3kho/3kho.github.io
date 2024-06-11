@@ -35,36 +35,36 @@
       button:hover {
         background-color: #06adbc;
       }
-      .game-link {
+     .game-link {
         height: 400px;
         width: 300px;
         text-decoration: none;
       }
-      .game-tile {
+     .game-tile {
         background-color: #949494;
         height: 400px;
         width: 300px;
         border-radius: 30px;
         transition: 0.3s; /* add transition effect */
       }
-      .game-tile:hover {
+     .game-tile:hover {
         transform: scale(1.05); /* add hover effect */
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* add hover effect */
       }
-      .game-icon {
+     .game-icon {
         border-radius: 30px;
         width: 300px;
         height: 300px;
         cursor: pointer; /* add cursor pointer */
       }
-      .game-title {
+     .game-title {
         font-size: 30px;
         font-weight: bold;
         color: #000000;
         text-align: center;
         margin: auto;
       }
-      .flex-container {
+     .flex-container {
         display: flex;
         flex-direction: row;
         order: 0;
@@ -73,7 +73,7 @@
         align-items: center;
         justify-content: center;
       }
-      .container {
+     .container {
         padding: 10px;
       }
       #search {
@@ -114,6 +114,20 @@
           transform: rotate(360deg);
         }
       }
+      body {
+        cursor: none; /* Hide the default cursor */
+      }
+     .dot {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 10px;
+        height: 10px;
+        background-color: #06adbc;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none; /* Makethe dot not interactable */
+      }
     </style>
   </head>
   <body style="background-color: #121212; color: #ffffff; font-family: sans-serif; text-decoration: none; text-align: center;">
@@ -126,11 +140,12 @@
       </a>
     </p>
     <button id="↑" style="display: none;">&#8593;</button>
+    <div class="dot"></div> <!-- Add the dot element -->
     <script>
       let games = [];
       fetch("config/games.json")
-   .then((response) => response.json())
-   .then((data) => {
+  .then((response) => response.json())
+  .then((data) => {
         games = data;
         const container = document.getElementById("game-container");
         data.forEach((project) => {
@@ -146,7 +161,7 @@
           });
           document.getElementById("loader").style.display = "none";
         })
-     .catch((error) => console.error("Error:", error));
+    .catch((error) => console.error("Error:", error));
 
       function searchGames() {
         const input = document.getElementById("search");
@@ -154,8 +169,8 @@
         const container = document.getElementById("game-container");
         container.innerHTML = "";
         games
-       .filter((game) => game.title.toUpperCase().includes(filter))
-       .forEach((project) => {
+      .filter((game) => game.title.toUpperCase().includes(filter))
+      .forEach((project) => {
             const game = document.createElement("a");
             game.href = project.link;
             game.className = "game-link container";
@@ -180,6 +195,16 @@
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
       };
+
+      // Get the dot element
+      const dot = document.querySelector('.dot');
+
+      // Add event listener to track mouse movement
+      document.addEventListener('mousemove', (e) => {
+        // Update the dot's position
+        dot.style.top = `${e.clientY}px`;
+        dot.style.left = `${e.clientX}px`;
+      });
     </script>
   </body>
 </html>
