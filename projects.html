@@ -45,11 +45,17 @@
         height: 400px;
         width: 300px;
         border-radius: 30px;
+        transition: 0.3s; /* add transition effect */
+      }
+      .game-tile:hover {
+        transform: scale(1.05); /* add hover effect */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* add hover effect */
       }
       .game-icon {
         border-radius: 30px;
         width: 300px;
         height: 300px;
+        cursor: pointer; /* add cursor pointer */
       }
       .game-title {
         font-size: 30px;
@@ -70,6 +76,36 @@
       .container {
         padding: 10px;
       }
+      #search {
+        width: 100%;
+        font-size: 18px;
+        padding: 10px 20px;
+        margin: auto;
+        border-radius: 30px;
+        max-width: 600px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc; /* add border to search bar */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* add shadow to search bar */
+      }
+      #back-to-top {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        font-size: 24px;
+        cursor: pointer;
+        background-color: #06adbc;
+        border: none;
+        color: white;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border-radius: 50%;
+      }
+      #back-to-top:hover {
+        background-color: #06adbc;
+      }
       @keyframes spin {
         0% {
           transform: rotate(0deg);
@@ -82,7 +118,7 @@
   </head>
   <body style="background-color: #121212; color: #ffffff; font-family: sans-serif; text-decoration: none; text-align: center;">
     <h1 style="font-size: 3em; text-align: center;">Projects</h1>
-    <input type="text" id="search" onkeyup="searchGames()" placeholder="Search for games..." style="width: 100%; font-size: 18px; padding: 6px 20px; margin: auto; border-radius: 30px; max-width: 600px; margin-bottom: 10px;" />
+    <input type="text" id="search" onkeyup="searchGames()" placeholder="Search for games..." style="width: 100%; font-size: 18px; padding: 10px 20px; margin: auto; border-radius: 30px; max-width: 600px; margin-bottom: 10px; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);" />
     <div id="loader" style="display: block; border: 16px solid #f3f3f3; border-top: 16px solid #3498db; border-radius: 50%; width: 120px; height: 120px; animation: spin 0.3s linear infinite; margin: auto; margin-top: 1rem;"></div>
     <div id="game-container" class="flex-container"></div>
     <p class="text-center">
@@ -92,12 +128,12 @@
         </button>
       </a>
     </p>
-    <button id="back-to-top" style="display: none; position: fixed; bottom: 20px; right: 20px; background-color: #06adbc; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 20px;">Back to top</button>
+    <button id="back-to-top" style="display: none;">&#8593;</button>
     <script>
       let games = [];
       fetch("config/games.json")
-     .then((response) => response.json())
-     .then((data) => {
+   .then((response) => response.json())
+   .then((data) => {
         games = data;
         const container = document.getElementById("game-container");
         data.forEach((project) => {
@@ -106,14 +142,14 @@
             game.className = "game-link container";
             game.innerHTML = `
             <div class="game-tile">
-              <img class="game-icon" src="${project.imgSrc}" alt="icon" />
+              <img class="game-icon" src="${project.imgSrc}" alt="icon" style="cursor: pointer;" />
               <p class="game-title">${project.title}</p>
               </div>`;
               container.appendChild(game);
           });
           document.getElementById("loader").style.display = "none";
         })
-       .catch((error) => console.error("Error:", error));
+     .catch((error) => console.error("Error:", error));
 
       function searchGames() {
         const input = document.getElementById("search");
@@ -121,14 +157,14 @@
         const container = document.getElementById("game-container");
         container.innerHTML = "";
         games
-         .filter((game) => game.title.toUpperCase().includes(filter))
-         .forEach((project) => {
+       .filter((game) => game.title.toUpperCase().includes(filter))
+       .forEach((project) => {
             const game = document.createElement("a");
             game.href = project.link;
             game.className = "game-link container";
             game.innerHTML = `
             <div class="game-tile">
-              <img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" />
+              <img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" style="cursor: pointer;" />
               <p class="game-title">${project.title}</p>
               </div>`;
             container.appendChild(game);
