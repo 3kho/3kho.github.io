@@ -156,7 +156,7 @@ body {
     <div class="dot"></div> <!-- Add the dot element -->
     <div class="overlay">
         <span class="close-btn">&times;</span>
-        <iframe src=""frameborder="0"></iframe>
+        <iframe src="" frameborder="0"></iframe>
     </div>
     <script src="./dist/kinet.min.js"></script>
     <script src="/js/main.js"></script>
@@ -192,6 +192,21 @@ body {
         // Add event listener to the close button
         closeBtn.addEventListener('click', () => {
             overlay.style.display = 'none';
+        });
+
+        // Add event listener to handle messages from the iframe
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'tabTitleUpdated') {
+                document.title = event.data.data;
+            } else if (event.data.type === 'tabIconUpdated') {
+                const link = document.createElement('link');
+                link.type = 'image/x-icon';
+                link.rel = 'shortcut icon';
+                link.href = event.data.data;
+                document.head.appendChild(link);
+            } else if (event.data.type === 'tabSettingsReset') {
+                // Reset title or favicon here
+            }
         });
     </script>
 </body>
