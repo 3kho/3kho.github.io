@@ -131,10 +131,22 @@ body {
 
 .overlay .close-btn {
     position: absolute;
-    top: 10px;
-    left: 4px;
+    top: 15px;
+    left: 10px;
     font-size: 26px;
     cursor: pointer;
+}
+
+.overlay .fullscreen-btn {
+    position: absolute;
+    top: 15px;
+    left: 35px;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+.overlay .close-btn, .overlay .fullscreen-btn {
+    color: #06adbc;
 }
 
 /* Removed footer styles */
@@ -154,10 +166,11 @@ body {
 
     </main>
     <div class="dot"></div> <!-- Add the dot element -->
-    <div class="overlay">
-        <span class="close-btn">&times;</span>
-        <iframe src="" frameborder="0"></iframe>
-    </div>
+<div class="overlay">
+    <span class="close-btn" style="left: 10px;">&times;</span>
+    <span class="fullscreen-btn" style="left: 35px; font-size: 26px;">&#x21DB;</span>
+    <iframe src="" frameborder="0"></iframe>
+</div>
     <script src="./dist/kinet.min.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/subtitle.js"></script>
@@ -177,6 +190,7 @@ body {
         const learnMoreBtn = document.getElementById('learn-more-btn');
         const overlay = document.querySelector('.overlay');
         const closeBtn = document.querySelector('.close-btn');
+        const fullscreenBtn = document.querySelector('.fullscreen-btn');
 
         // Add event listeners to the buttons
         playNowBtn.addEventListener('click', () => {
@@ -192,6 +206,20 @@ body {
         // Add event listener to the close button
         closeBtn.addEventListener('click', () => {
             overlay.style.display = 'none';
+        });
+
+        // Add event listener to the full-screen button
+        fullscreenBtn.addEventListener('click', () => {
+            const iframe = document.querySelector('iframe');
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
+            } else if (iframe.mozRequestFullScreen) {
+                iframe.mozRequestFullScreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            }
         });
 
         // Add event listener to handle messages from the iframe
