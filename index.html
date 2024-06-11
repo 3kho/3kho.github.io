@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <style>
-/* General Styles */
 body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
@@ -16,10 +15,9 @@ body {
     margin: 0;
     padding: 0;
     background-color: #000; 
-    cursor: none; /* Hide the default cursor */
+    cursor: none; 
 }
 
-/* Add styles for the dot */
 .dot {
     position: absolute;
     top: 0;
@@ -29,10 +27,9 @@ body {
     background-color: #06adbc;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    pointer-events: none; /* Make the dot not interactable */
+    pointer-events: none; 
 }
 
-/* Full Page Header */
 .full-page-header {
     background-image: url('/path/to/header-bg.jpg');
     background-size: cover;
@@ -43,35 +40,35 @@ body {
     align-items: center;
     text-align: center;
     color: #06adbc;
-    opacity: 0; /* Start with zero opacity */
-    animation: fadeIn 2s forwards; /* Apply fade-in animation */
+    opacity: 0; 
+    animation: fadeIn 2s forwards;
 }
 
 .full-page-header h1 {
-    font-size: 60px; /* Increased font size */
+    font-size: 60px;
     margin-bottom: 0;
 }
 
 .full-page-header p {
-    font-size: 30px; /* Increased font size */
-    margin-top: 5; /* Remove or reduce the top margin */
+    font-size: 30px; 
+    margin-top: 5; 
 }
 
 /* Button Container */
 .button-container {
     display: flex;
-    justify-content: center; /* Center the buttons horizontally */
-    gap: 20px; /* Adjust the gap between buttons */
-    margin-top: 20px; /* Add some margin above the buttons */
+    justify-content: center;
+    gap: 20px; 
+    margin-top: 20px; 
 }
 
 .primary-btn,.secondary-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 15px 30px; /* Increased padding for larger buttons */
-    font-size: 18px; /* Increased font size for readability */
-    background-color: #007bff; /* Primary button color */
+    padding: 15px 30px; 
+    font-size: 18px; 
+    background-color: #007bff; 
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -80,15 +77,15 @@ body {
 }
 
 .primary-btn {
-    background-color: #06adbc; /* Differentiate primary button */
+    background-color: #06adbc; 
 }
 
 .secondary-btn {
-    background-color: #6c757d; /* Differentiate secondary button */
+    background-color: #6c757d; 
 }
 
 .primary-btn:hover,.secondary-btn:hover {
-    background-color: #0056b3; /* Hover effect */
+    background-color: #0056b3; 
     opacity: 0.9;
 }
 
@@ -98,9 +95,8 @@ body {
     to {opacity: 1;}
 }
 
-/* Content Section */
 .content-section {
-    padding: 20px; /* Reduced padding */
+    padding: 20px; 
     text-align: center;
     color: #06adbc;
 }
@@ -108,31 +104,31 @@ body {
 /* Overlay styles */
 .overlay {
     position: fixed;
-    bottom: 0; /* Changed from top: 0 to bottom: 0 */
-    left: 20px; /* Added some space from the left edge */
-    right: 20px; /* Added some space from the right edge */
-    height: 90vh; /* Changed from height: 100vh to height: 80vh */
+    bottom: 0; 
+    left: 20px; 
+    right: 20px; 
+    height: 90vh; 
     background-color: rgba(0, 0, 0, 0.5);
     display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 20px;
-    border-top-left-radius: 20px; /* Curved top-left corner */
-    border-top-right-radius: 20px; /* Curved top-right corner */
+    border-top-left-radius: 20px; 
+    border-top-right-radius: 20px; 
 }
 
 .overlay iframe {
     width: 100%;
-    height: 100%; /* Changed from height: 80vh to height: 100% */
+    height: 100%;
     border: none;
-    border-radius: 20px 20px 0 0; /* Curved top corners, straight bottom edges */
+    border-radius: 20px 20px 0 0; 
 }
 
 .overlay .close-btn {
     position: absolute;
     top: -16px;
-    left: 15px; /* Increased from 10px to 15px */
+    left: 15px; 
     font-size: 26px;
     cursor: pointer;
 }
@@ -140,7 +136,7 @@ body {
 .overlay .fullscreen-btn {
     position: absolute;
     top: -16px;
-    left: 50px; /* Increased from 40px to 50px */
+    left: 50px; 
     font-size: 26px;
     cursor: pointer;
 }
@@ -149,7 +145,6 @@ body {
     color: #06adbc;
 }
 
-/* Removed footer styles */
 </style>
 <body>
     <header>
@@ -165,7 +160,7 @@ body {
     <main>
 
     </main>
-    <div class="dot"></div> <!-- Add the dot element -->
+    <div class="dot"></div>
 <div class="overlay">
     <span class="close-btn" style="left: 10px;">&times;</span>
     <span class="fullscreen-btn" style="left: 35px; font-size: 26px;">&#x21DB;</span>
@@ -175,24 +170,19 @@ body {
     <script src="/js/main.js"></script>
     <script src="/js/subtitle.js"></script>
     <script>
-        // Get the dot element
         const dot = document.querySelector('.dot');
 
-        // Add event listener to track mouse movement
         document.addEventListener('mousemove', (e) => {
-            // Update the dot's position
             dot.style.top = `${e.clientY}px`;
             dot.style.left = `${e.clientX}px`;
         });
 
-        // Get the buttons and overlay elements
         const playNowBtn = document.getElementById('play-now-btn');
         const learnMoreBtn = document.getElementById('learn-more-btn');
         const overlay = document.querySelector('.overlay');
         const closeBtn = document.querySelector('.close-btn');
         const fullscreenBtn = document.querySelector('.fullscreen-btn');
-
-        // Add event listeners to the buttons
+        
         playNowBtn.addEventListener('click', () => {
             overlay.style.display = 'flex';
             overlay.querySelector('iframe').src = './projects.html';
@@ -203,12 +193,10 @@ body {
             overlay.querySelector('iframe').src = './misc.html';
         });
 
-        // Add event listener to the close button
         closeBtn.addEventListener('click', () => {
             overlay.style.display = 'none';
         });
 
-        // Add event listener to the full-screen button
         fullscreenBtn.addEventListener('click', () => {
             const iframe = document.querySelector('iframe');
             if (iframe.requestFullscreen) {
@@ -222,7 +210,6 @@ body {
             }
         });
 
-        // Add event listener to handle messages from the iframe
         window.addEventListener('message', (event) => {
             if (event.data.type === 'tabTitleUpdated') {
                 document.title = event.data.data;
@@ -233,7 +220,6 @@ body {
                 link.href = event.data.data;
                 document.head.appendChild(link);
             } else if (event.data.type === 'tabSettingsReset') {
-                // Reset title or favicon here
             }
         });
     </script>
