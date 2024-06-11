@@ -1,33 +1,198 @@
 <!DOCTYPE html>
 <html lang="en-US">
-  <head>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <meta name="keywords" content="front-end web developer, unblocked, games, google sites, unblocked games mom, ublocked, code, coding, programmer, development, javascript, jquery, bootstrap, sass, less, git" />
-    <meta property="og:title" content="Welcome to 3kh0 lite, a lightweight, fast, and clean game site." />
-    <meta property="og:site_name" content="3kh0.github.io" />
-    <meta property="og:description" content="Welcome to 3kh0 lite, a lightweight, fast, and clean game site." />
-    <meta name="description" content="Welcome to 3kh0 lite, a lightweight, fast, and clean game site." />
-    <meta name="author" content="3kh0" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3kh0 lite</title>
-  </head>
-  <body style="background-color: #121212; color: #ffffff; font-family: sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
-    <h1 style="font-size: 3em; text-align: center;">
-      3kh0 lite
-    </h1>
-    <span id="subtitle" style="font-size: 1.5em;">...</span>
-    <p style="text-align: center; max-width: 600px; margin: 20px auto;">
-      Welcome to 3kh0 lite, a lightweight, lightning fast, and simple game site.<br />
-      <a href="/projects.html" style="text-decoration: none;"><button style="cursor: pointer; background-color: #22c55e; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 20px; margin-top: 20px;">Start playing!</button></a><br />
-      <br />
-      <a href="/misc.html" style="text-decoration: none;"><button style="cursor: pointer; background-color: #b625cc; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 20px; margin-top: 5px;">Tools and settings</button></a>
-    </p>
-    <p style="text-align: center; max-width: 600px; margin: 20px auto;">
-        &copy; 3kh0, 2024. All rights reserved. You are welcome to use and/or duplicate material from the <a href="https://github.com/3kh0/3kh0-lite" style="color: #22c55e;">GitHub repository</a> with proper credit to 3kh0.<br /><br />
-        Contact Echo at <a href="mailto:echo-the-coder@tuta.io" style="color: #22c55e;">echo-the-coder@tuta.io</a>.
-    </p>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #fff; 
+    margin: 0;
+    padding: 0;
+    background-color: #000; 
+    cursor: none; /* Hide the default cursor */
+}
+
+/* Add styles for the dot */
+.dot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    background-color: #06adbc;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; /* Make the dot not interactable */
+}
+
+/* Full Page Header */
+.full-page-header {
+    background-image: url('/path/to/header-bg.jpg');
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #06adbc;
+    opacity: 0; /* Start with zero opacity */
+    animation: fadeIn 2s forwards; /* Apply fade-in animation */
+}
+
+.full-page-header h1 {
+    font-size: 60px; /* Increased font size */
+    margin-bottom: 0;
+}
+
+.full-page-header p {
+    font-size: 30px; /* Increased font size */
+    margin-top: 5; /* Remove or reduce the top margin */
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 20px; /* Adjust the gap between buttons */
+    margin-top: 20px; /* Add some margin above the buttons */
+}
+
+.primary-btn,.secondary-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 30px; /* Increased padding for larger buttons */
+    font-size: 18px; /* Increased font size for readability */
+    background-color: #007bff; /* Primary button color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.primary-btn {
+    background-color: #06adbc; /* Differentiate primary button */
+}
+
+.secondary-btn {
+    background-color: #6c757d; /* Differentiate secondary button */
+}
+
+.primary-btn:hover,.secondary-btn:hover {
+    background-color: #0056b3; /* Hover effect */
+    opacity: 0.9;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* Content Section */
+.content-section {
+    padding: 20px; /* Reduced padding */
+    text-align: center;
+    color: #06adbc;
+}
+
+/* Overlay styles */
+.overlay {
+    position: fixed;
+    bottom: 0; /* Changed from top: 0 to bottom: 0 */
+    left: 20px; /* Added some space from the left edge */
+    right: 20px; /* Added some space from the right edge */
+    height: 90vh; /* Changed from height: 100vh to height: 80vh */
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    border-top-left-radius: 20px; /* Curved top-left corner */
+    border-top-right-radius: 20px; /* Curved top-right corner */
+}
+
+.overlay iframe {
+    width: 100%;
+    height: 100%; /* Changed from height: 80vh to height: 100% */
+    border: none;
+    border-radius: 20px 20px 0 0; /* Curved top corners, straight bottom edges */
+}
+
+.overlay .close-btn {
+    position: absolute;
+    top: 10px;
+    left: 4px;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* Removed footer styles */
+</style>
+<body>
+    <header>
+        <div class="full-page-header">
+            <h1>3kh0 lite</h1>
+            <p>A lightweight, fast, and clean game site.</p>
+            <div class="button-container">
+                <button class="primary-btn" id="play-now-btn">Play Now</button>
+                <button class="secondary-btn" id="learn-more-btn">Learn More</button>
+            </div>
+        </div>
+    </header>
+    <main>
+
+    </main>
+    <div class="dot"></div> <!-- Add the dot element -->
+    <div class="overlay">
+        <span class="close-btn">&times;</span>
+        <iframe src=""frameborder="0"></iframe>
+    </div>
+    <script src="./dist/kinet.min.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/subtitle.js"></script>
-  </body>
+    <script>
+        // Get the dot element
+        const dot = document.querySelector('.dot');
+
+        // Add event listener to track mouse movement
+        document.addEventListener('mousemove', (e) => {
+            // Update the dot's position
+            dot.style.top = `${e.clientY}px`;
+            dot.style.left = `${e.clientX}px`;
+        });
+
+        // Get the buttons and overlay elements
+        const playNowBtn = document.getElementById('play-now-btn');
+        const learnMoreBtn = document.getElementById('learn-more-btn');
+        const overlay = document.querySelector('.overlay');
+        const closeBtn = document.querySelector('.close-btn');
+
+        // Add event listeners to the buttons
+        playNowBtn.addEventListener('click', () => {
+            overlay.style.display = 'flex';
+            overlay.querySelector('iframe').src = 'https://www.google.com';
+        });
+
+        learnMoreBtn.addEventListener('click', () => {
+            overlay.style.display = 'flex';
+            overlay.querySelector('iframe').src = 'https://www.google.com';
+        });
+
+        // Add event listener to the close button
+        closeBtn.addEventListener('click', () => {
+            overlay.style.display = 'none';
+        });
+    </script>
+</body>
 </html>
