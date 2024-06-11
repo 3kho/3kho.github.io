@@ -1,5 +1,5 @@
 # Crap todo list
-- get tab cloaker working (do not show in iframe but as another doc)
+- get tab cloaker working (works in some browsers rn)
 - update css on other pages
 - add full-screen option for iframe
 - redo search bar and games css
