@@ -21,7 +21,7 @@
       }
       button {
         cursor: pointer;
-        background-color: #22c55e;
+        background-color: #06adbc;
         border: none;
         color: white;
         padding: 15px 32px;
@@ -31,6 +31,9 @@
         font-size: 16px;
         border-radius: 20px;
         margin-top: 20px;
+      }
+      button:hover {
+        background-color: #06adbc;
       }
       .game-link {
         height: 400px;
@@ -84,17 +87,17 @@
     <div id="game-container" class="flex-container"></div>
     <p class="text-center">
       <a href="/index.html" style="text-decoration: none;">
-        <button style="cursor: pointer; background-color: #b625cc; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 20px; margin-top: 5px;">
+        <button style="cursor: pointer; background-color: #06adbc; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 20px; margin-top: 5px;">
           Go to the homepage
         </button>
       </a>
     </p>
-    <button id="back-to-top" style="display: none; position: fixed; bottom: 20px; right: 20px;">Back to top</button>
+    <button id="back-to-top" style="display: none; position: fixed; bottom: 20px; right: 20px; background-color: #06adbc; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 20px;">Back to top</button>
     <script>
       let games = [];
       fetch("config/games.json")
-      .then((response) => response.json())
-      .then((data) => {
+     .then((response) => response.json())
+     .then((data) => {
         games = data;
         const container = document.getElementById("game-container");
         data.forEach((project) => {
@@ -110,7 +113,7 @@
           });
           document.getElementById("loader").style.display = "none";
         })
-        .catch((error) => console.error("Error:", error));
+       .catch((error) => console.error("Error:", error));
 
       function searchGames() {
         const input = document.getElementById("search");
@@ -118,8 +121,8 @@
         const container = document.getElementById("game-container");
         container.innerHTML = "";
         games
-          .filter((game) => game.title.toUpperCase().includes(filter))
-          .forEach((project) => {
+         .filter((game) => game.title.toUpperCase().includes(filter))
+         .forEach((project) => {
             const game = document.createElement("a");
             game.href = project.link;
             game.className = "game-link container";
