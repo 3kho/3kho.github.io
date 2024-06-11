@@ -39,7 +39,6 @@
         height: 400px;
         width: 300px;
         text-decoration: none;
-        cursor: pointer; /* Add cursor pointer */
       }
      .game-tile {
         background-color: #949494;
@@ -85,7 +84,7 @@
         border-radius: 30px;
         max-width: 600px;
         margin-bottom: 10px;
-        border: 1px solid #06adbc; /* add border to search bar */
+        border: 1px solid #ccc; /* add border to search bar */
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* add shadow to search bar */
       }
       #↑ {
@@ -115,6 +114,9 @@
           transform: rotate(360deg);
         }
       }
+      body {
+        cursor: none; /* Hide the default cursor */
+      }
      .dot {
         position: absolute;
         top: 0;
@@ -124,4 +126,85 @@
         background-color: #06adbc;
         border-radius: 50%;
         transform: translate(-50%, -50%);
-        pointer-events: none; /* Makethe dot not interactable
+        pointer-events: none; /* Makethe dot not interactable */
+      }
+    </style>
+  </head>
+  <body style="background-color: #121212; color: #ffffff; font-family: sans-serif; text-decoration: none; text-align: center;">
+    <br>
+    <input type="text" id="search" onkeyup="searchGames()" placeholder="Search for games..." style="width: 100%; font-size: 18px; padding: 10px 20px; margin: auto; border-radius: 30px; max-width: 600px; margin-bottom: 10px; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);" />
+    <div id="loader" style="display: block; border: 16px solid #f3f3f3; border-top: 16px solid #3498db; border-radius: 50%; width: 120px; height: 120px; animation: spin 0.3s linear infinite; margin: auto; margin-top: 1rem;"></div>
+    <div id="game-container" class="flex-container"></div>
+    <p class="text-center">
+      <a href="/index.html" style="text-decoration: none;">
+      </a>
+    </p>
+    <button id="↑" style="display: none;">&#8593;</button>
+    <div class="dot"></div> <!-- Add the dot element -->
+    <script>
+      let games = [];
+      fetch("config/games.json")
+  .then((response) => response.json())
+  .then((data) => {
+        games = data;
+        const container = document.getElementById("game-container");
+        data.forEach((project) => {
+          const game = document.createElement("a");
+          game.href = project.link;
+            game.className = "game-link container";
+            game.innerHTML = `
+            <div class="game-tile">
+              <img class="game-icon" src="${project.imgSrc}" alt="icon" style="cursor: pointer;" />
+              <p class="game-title">${project.title}</p>
+              </div>`;
+              container.appendChild(game);
+          });
+          document.getElementById("loader").style.display = "none";
+        })
+    .catch((error) => console.error("Error:", error));
+
+      function searchGames() {
+        const input = document.getElementById("search");
+        const filter = input.value.toUpperCase();
+        const container = document.getElementById("game-container");
+        container.innerHTML = "";
+        games
+      .filter((game) => game.title.toUpperCase().includes(filter))
+      .forEach((project) => {
+            const game = document.createElement("a");
+            game.href = project.link;
+            game.className = "game-link container";
+            game.innerHTML = `
+            <div class="game-tile">
+              <img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" style="cursor: pointer;" />
+              <p class="game-title">${project.title}</p>
+              </div>`;
+            container.appendChild(game);
+          });
+        }
+        const backToTopButton = document.getElementById('↑');
+        window.onscroll = function () {
+          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            backToTopButton.style.display = "block";
+          } else {
+          backToTopButton.style.display = "none";
+        }
+      };
+
+      backToTopButton.onclick = function () {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      };
+
+      // Get the dot element
+      const dot = document.querySelector('.dot');
+
+      // Add event listener to track mouse movement
+      document.addEventListener('mousemove', (e) => {
+        // Update the dot's position
+        dot.style.top = `${e.clientY}px`;
+        dot.style.left = `${e.clientX}px`;
+      });
+    </script>
+  </body>
+</html>
