@@ -87,7 +87,7 @@
         border: 1px solid #ccc; /* add border to search bar */
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* add shadow to search bar */
       }
-      #back-to-top {
+      #↑ {
         display: none;
         position: fixed;
         bottom: 20px;
@@ -103,7 +103,7 @@
         display: inline-block;
         border-radius: 50%;
       }
-      #back-to-top:hover {
+      #↑:hover {
         background-color: #06adbc;
       }
       @keyframes spin {
@@ -123,12 +123,9 @@
     <div id="game-container" class="flex-container"></div>
     <p class="text-center">
       <a href="/index.html" style="text-decoration: none;">
-        <button style="cursor: pointer; background-color: #06adbc; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 20px; margin-top: 5px;">
-          Go to the homepage
-        </button>
       </a>
     </p>
-    <button id="back-to-top" style="display: none;">&#8593;</button>
+    <button id="↑" style="display: none;">&#8593;</button>
     <script>
       let games = [];
       fetch("config/games.json")
@@ -170,7 +167,7 @@
             container.appendChild(game);
           });
         }
-        const backToTopButton = document.getElementById('back-to-top');
+        const backToTopButton = document.getElementById('↑');
         window.onscroll = function () {
           if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
             backToTopButton.style.display = "block";
