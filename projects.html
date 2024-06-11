@@ -45,17 +45,17 @@
         height: 400px;
         width: 300px;
         border-radius: 30px;
-        transition: 0.3s; /* add transition effect */
+        transition: 0.3s; 
       }
      .game-tile:hover {
-        transform: scale(1.05); /* add hover effect */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* add hover effect */
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       }
      .game-icon {
         border-radius: 30px;
         width: 300px;
         height: 300px;
-        cursor: pointer; /* add cursor pointer */
+        cursor: pointer; 
       }
      .game-title {
         font-size: 30px;
@@ -84,8 +84,8 @@
         border-radius: 30px;
         max-width: 600px;
         margin-bottom: 10px;
-        border: 1px solid #06adbc; /* add border to search bar */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* add shadow to search bar */
+        border: 1px solid #06adbc; 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
       }
       #↑ {
         display: none;
@@ -115,7 +115,7 @@
         }
       }
       body {
-        cursor: none; /* Hide the default cursor */
+        cursor: none;
       }
      .dot {
         position: absolute;
@@ -126,7 +126,7 @@
         background-color: #06adbc;
         border-radius: 50%;
         transform: translate(-50%, -50%);
-        pointer-events: none; /* Makethe dot not interactable */
+        pointer-events: none; 
       }
     </style>
   </head>
@@ -140,7 +140,7 @@
       </a>
     </p>
     <button id="↑" style="display: none;">&#8593;</button>
-    <div class="dot"></div> <!-- Add the dot element -->
+    <div class="dot"></div> 
     <script>
       let games = [];
       fetch("config/games.json")
@@ -196,12 +196,9 @@
         document.documentElement.scrollTop = 0;
       };
 
-      // Get the dot element
       const dot = document.querySelector('.dot');
 
-      // Add event listener to track mouse movement
       document.addEventListener('mousemove', (e) => {
-        // Update the dot's position
         dot.style.top = `${e.clientY}px`;
         dot.style.left = `${e.clientX}px`;
       });
