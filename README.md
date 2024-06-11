@@ -1,2 +1,4 @@
 # Crap todo list
-- redo search bar and games icon css
+- redo search bar
+- add favicon
+- fix the close and fullscreen buttons
