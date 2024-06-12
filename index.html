@@ -167,7 +167,7 @@ body {
 
 .button-wrap.close-btn,.button-wrap.fullscreen-btn {
     cursor: pointer;
-    color: #06adbc; /* White text colorto contrast with the grey background */
+    color: #06adbc; /* White text color to contrast with the grey background */
 }
 
 </style>
@@ -190,7 +190,6 @@ body {
     <div class="button-wrap">
         <span class="icon-wrap"><span class="close-btn">&#x2715;</span></span>
         <span class="icon-wrap"><span class="fullscreen-btn">&#x22BB;</span></span>
-        <span class="bookmark-btn" onclick="javascript:window.external.AddFavorite(document.querySelector('iframe').contentWindow.location.href, document.querySelector('iframe').contentWindow.document.title);">&#x2665;</span>
     </div>
     <iframe src="" frameborder="0"></iframe>
 </div>
@@ -250,20 +249,6 @@ body {
             } else if (event.data.type === 'tabSettingsReset') {
             }
         });
-
-window.addEventListener('message', (event) => {
-  if (event.data.type === 'uploadFile') {
-    const formData = event.data.data;
-    // Send the file data to your server or handle it accordingly
-    fetch('/upload-file', {
-      method: 'POST',
-      body: formData
-    })
-  .then((response) => response.json())
-  .then((data) => console.log(data))
-  .catch((error) => console.error(error));
-  }
-});
     </script>
 </body>
 </html>
