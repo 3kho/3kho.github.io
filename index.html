@@ -105,44 +105,69 @@ body {
 .overlay {
     position: fixed;
     bottom: 0; 
-    left: 20px; 
-    right: 20px; 
-    height: 90vh; 
+    left: 0; 
+    right: 0; 
+    height: 95vh; 
     background-color: rgba(0, 0, 0, 0.5);
     display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     padding: 20px;
+    padding-top: 40px; /* Add some padding to the top of the overlay */
     border-top-left-radius: 20px; 
     border-top-right-radius: 20px; 
 }
 
 .overlay iframe {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 40px); /* Reduce the height of the iframe to make room for the button wrap */
+    margin-top: 40px; /* Add some margin to the top of the iframe */
     border: none;
     border-radius: 20px 20px 0 0; 
 }
 
-.overlay .close-btn {
+.overlay.button-container {
     position: absolute;
-    top: -16px;
-    left: 15px; 
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.overlay.close-btn {
     font-size: 26px;
     cursor: pointer;
 }
 
-.overlay .fullscreen-btn {
-    position: absolute;
-    top: -16px;
-    left: 50px; 
+.overlay.fullscreen-btn {
     font-size: 26px;
     cursor: pointer;
 }
 
-.overlay .close-btn, .overlay .fullscreen-btn {
+.overlay.close-btn,.overlay.fullscreen-btn {
     color: #06adbc;
+}
+
+.button-wrap {
+    position: absolute;
+    top: 39px; /* Move the button wrap down a bit */
+    left: 20px;
+    background-color: #333; /* Same color as the grey button on the header */
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.button-wrap.icon-wrap {
+    transform: scale(1.5); /* Increased scale to make the icon bigger */
+    display: inline-block;
+}
+
+.button-wrap.close-btn,.button-wrap.fullscreen-btn {
+    cursor: pointer;
+    color: #06adbc; /* White text color to contrast with the grey background */
 }
 
 </style>
@@ -162,8 +187,10 @@ body {
     </main>
     <div class="dot"></div>
 <div class="overlay">
-    <span class="close-btn" style="left: 10px;">&times;</span>
-    <span class="fullscreen-btn" style="left: 35px; font-size: 26px;">&#x21DB;</span>
+    <div class="button-wrap">
+        <span class="icon-wrap"><span class="close-btn">&#x2715;</span></span>
+        <span class="icon-wrap"><span class="fullscreen-btn">&#x22BB;</span></span>
+    </div>
     <iframe src="" frameborder="0"></iframe>
 </div>
     <script src="./dist/kinet.min.js"></script>
@@ -216,7 +243,7 @@ body {
             } else if (event.data.type === 'tabIconUpdated') {
                 const link = document.createElement('link');
                 link.type = 'image/x-icon';
-                link.rel = 'shortcut icon';
+                link.rel = 'hortcut icon';
                 link.href = event.data.data;
                 document.head.appendChild(link);
             } else if (event.data.type === 'tabSettingsReset') {
