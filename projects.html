@@ -35,30 +35,41 @@
       button:hover {
         background-color: #06adbc;
       }
-      .game-link {
-        display: inline-block;
-        margin: 10px;
-        padding: 10px;
-        border-radius: 20px;
-        background-color: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .game-tile {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        padding: 0;
-      }
-      .game-icon {
-        width: 100px; /* increased icon size */
-        height: 100px; /* increased icon size */
-        border-radius: 10px;
-        margin-right: 10px;
-      }
-      .flex-container {
+.game-link {
+  display: inline-block;
+  margin: 10px;
+  width: 210px; /* adjust the width to your liking */
+  height: 50px; /* adjust the height to your liking */
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: flex; /* add this */
+  align-items: center; /* add this */
+  justify-content: center; /* add this */
+  padding: 10px; /* add this */
+}
+
+.game-tile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0; /* remove padding */
+}
+
+.game-icon {
+  width: 50px; /* adjust the width to your liking */
+  height: 50px; /* adjust the height to your liking */
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.game-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin: 0; /* remove margin */
+}
+     .flex-container {
         display: flex;
         flex-direction: row;
         order: 0;
@@ -67,41 +78,19 @@
         align-items: center;
         justify-content: center;
       }
-      .container {
+     .container {
         padding: 10px;
       }
-      #search-icon {
-        position: relative;
-        display: inline-block;
-        margin: 10px;
-      }
-      #search-icon span {
-        position: absolute;
-        top: 0;
-        left: 0;
+      #search {
+        width: 100%;
         font-size: 18px;
-        color: #06adbc;
-        cursor: pointer;
-      }
-      #search-icon input[type="text"] {
-        width: 0;
         padding: 10px 20px;
-        font-size: 18px;
-        border: none;
+        margin: auto;
         border-radius: 30px;
-        transition: width 0.3s ease-in-out;
-      }
-      #search-icon input[type="text"]:focus {
-        width: 200px; /* adjust the width to your liking */
-        padding: 10px 20px;
-        border: 1px solid #06adbc;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-      #search-icon input[type="text"]:focus + span {
-        color: #fff;
-        background-color: #06adbc;
-        border-radius: 50%;
-        padding: 10px;
+        max-width: 600px;
+        margin-bottom: 10px;
+        border: 1px solid #06adbc; 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
       }
       #↑ {
         display: none;
@@ -127,7 +116,7 @@
           transform: rotate(0deg);
         }
         100% {
-transform: rotate(360deg);
+          transform: rotate(360deg);
         }
       }
       body {
@@ -148,10 +137,7 @@ transform: rotate(360deg);
   </head>
   <body style="background-color: #121212; color: #ffffff; font-family: sans-serif; text-decoration: none; text-align: center;">
     <br>
-    <div id="search-icon">
-      <span><i class="fas fa-search"></i></span>
-      <input type="text" id="search" onkeyup="searchGames()" placeholder="Search for games...">
-    </div>
+    <input type="text" id="search" onkeyup="searchGames()" placeholder="Search for games..." style="width: 100%; font-size: 18px; padding: 10px 20px; margin: auto; border-radius: 30px; max-width: 600px; margin-bottom: 10px; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);" />
     <div id="loader" style="display: block; border: 16px solid #f3f3f3; border-top: 16px solid #3498db; border-radius: 50%; width: 120px; height: 120px; animation: spin 0.3s linear infinite; margin: auto; margin-top: 1rem;"></div>
     <div id="game-container" class="flex-container"></div>
     <p class="text-center">
@@ -163,23 +149,24 @@ transform: rotate(360deg);
     <script>
       let games = [];
       fetch("config/games.json")
-       .then((response) => response.json())
-       .then((data) => {
-          games = data;
-          const container = document.getElementById("game-container");
-          data.forEach((project) => {
-            const game = document.createElement("a");
-            game.href = project.link;
+  .then((response) => response.json())
+  .then((data) => {
+        games = data;
+        const container = document.getElementById("game-container");
+        data.forEach((project) => {
+          const game = document.createElement("a");
+          game.href = project.link;
             game.className = "game-link container";
             game.innerHTML = `
             <div class="game-tile">
               <img class="game-icon" src="${project.imgSrc}" alt="icon" style="cursor: pointer;" />
-            </div>`;
-            container.appendChild(game);
+              <p class="game-title">${project.title}</p>
+              </div>`;
+              container.appendChild(game);
           });
           document.getElementById("loader").style.display = "none";
         })
-       .catch((error) => console.error("Error:", error));
+    .catch((error) => console.error("Error:", error));
 
       function searchGames() {
         const input = document.getElementById("search");
@@ -187,24 +174,24 @@ transform: rotate(360deg);
         const container = document.getElementById("game-container");
         container.innerHTML = "";
         games
-         .filter((game) => game.title.toUpperCase().includes(filter))
-         .forEach((project) => {
+      .filter((game) => game.title.toUpperCase().includes(filter))
+      .forEach((project) => {
             const game = document.createElement("a");
             game.href = project.link;
             game.className = "game-link container";
             game.innerHTML = `
             <div class="game-tile">
               <img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" style="cursor: pointer;" />
-            </div>`;
+              <p class="game-title">${project.title}</p>
+              </div>`;
             container.appendChild(game);
           });
-      }
-
-      const backToTopButton = document.getElementById('↑');
-      window.onscroll = function () {
-        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-          backToTopButton.style.display = "block";
-        } else {
+        }
+        const backToTopButton = document.getElementById('↑');
+        window.onscroll = function () {
+          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            backToTopButton.style.display = "block";
+          } else {
           backToTopButton.style.display = "none";
         }
       };
@@ -219,17 +206,6 @@ transform: rotate(360deg);
       document.addEventListener('mousemove', (e) => {
         dot.style.top = `${e.clientY}px`;
         dot.style.left = `${e.clientX}px`;
-      });
-
-      const searchIcon = document.getElementById('search-icon');
-      const searchInput = document.getElementById('search');
-
-      searchIcon.addEventListener('click', () => {
-        searchInput.focus();
-      });
-
-      searchInput.addEventListener('blur', () => {
-        searchInput.style.width = '0';
       });
     </script>
   </body>
