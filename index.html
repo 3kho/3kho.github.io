@@ -244,24 +244,28 @@
             }
         });
 
-        bookmarkBtn.addEventListener('click', () => {
-            const iframe = document.querySelector('iframe');
-            const url = iframe.src;
-            const title = document.title;
+bookmarkBtn.addEventListener('click', async () => {
+  try {
+    const iframe = document.querySelector('iframe');
+    const url = iframe.src;
+    const title = document.title;
 
-            // Save the bookmark using the browser's bookmark API
-            if (window.sidebar && window.sidebar.addPanel) { // Mozilla Firefox Bookmark API
-                window.sidebar.addPanel(title, url, '');
-            } else if (window.external && ('AddFavorite' in window.external)) { // Internet Explorer Favorite API
-                window.external.AddFavorite(url, title);
-            } else if (window.opera && window.print) { // Opera Hotlist API
-                this.title = title;
-                window.location = url;
-            } else { // Default bookmarking for other browsers
-                alert('Press ' (navigator.userAgent.toLowerCase().indexOf('mac')!= -1? 'Cmd' : 'Ctrl') + ' D to bookmark this page.');
-            }
-        });
+    // Create a new bookmark
+    const bookmark = {
+      url,
+      title,
+    };
 
+    // Use the navigator.clipboard API to create a new bookmark
+    await navigator.clipboard.writeText(JSON.stringify(bookmark));
+
+    // Alert the user that the bookmark has been created
+    alert(`Bookmark created: ${title} - ${url}`);
+  } catch (error) {
+    console.error('Error creating bookmark:', error);
+    alert('Error creating bookmark. Please try again.');
+  }
+});
         window.addEventListener('message', (event) => {
             if (event.data.type === 'tabTitleUpdated') {
                 document.title = event.data.data;
