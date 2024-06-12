@@ -35,32 +35,30 @@
       button:hover {
         background-color: #06adbc;
       }
-     .game-link {
+      .game-link {
         display: inline-block;
         margin: 10px;
-        width: 210px; /* adjust the width to your liking */
-        height: 50px; /* adjust the height to your liking */
+        padding: 10px;
         border-radius: 20px;
         background-color: #fff;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 10px;
       }
-     .game-tile {
+      .game-tile {
         display: flex;
         flex-direction: row;
         align-items: center;
         padding: 0;
       }
-     .game-icon {
-        width: 50px; /* adjust the width to your liking */
-        height: 50px; /* adjust the height to your liking */
+      .game-icon {
+        width: 80px; /* increased icon size */
+        height: 80px; /* increased icon size */
         border-radius: 10px;
         margin-right: 10px;
       }
-     .flex-container {
+      .flex-container {
         display: flex;
         flex-direction: row;
         order: 0;
@@ -69,7 +67,7 @@
         align-items: center;
         justify-content: center;
       }
-     .container {
+      .container {
         padding: 10px;
       }
       #search {
@@ -113,7 +111,7 @@
       body {
         cursor: none;
       }
-     .dot {
+      .dot {
         position: absolute;
         top: 0;
         left: 0;
@@ -140,23 +138,23 @@
     <script>
       let games = [];
       fetch("config/games.json")
- .then((response) => response.json())
- .then((data) => {
-        games = data;
-        const container = document.getElementById("game-container");
-        data.forEach((project) => {
-          const game = document.createElement("a");
-          game.href = project.link;
+       .then((response) => response.json())
+       .then((data) => {
+          games = data;
+          const container = document.getElementById("game-container");
+          data.forEach((project) => {
+            const game = document.createElement("a");
+            game.href = project.link;
             game.className = "game-link container";
             game.innerHTML = `
             <div class="game-tile">
               <img class="game-icon" src="${project.imgSrc}" alt="icon" style="cursor: pointer;" />
             </div>`;
-              container.appendChild(game);
+            container.appendChild(game);
           });
           document.getElementById("loader").style.display = "none";
         })
-   .catch((error) => console.error("Error:", error));
+       .catch((error) => console.error("Error:", error));
 
       function searchGames() {
         const input = document.getElementById("search");
@@ -164,8 +162,8 @@
         const container = document.getElementById("game-container");
         container.innerHTML = "";
         games
-     .filter((game) => game.title.toUpperCase().includes(filter))
-     .forEach((project) => {
+         .filter((game) => game.title.toUpperCase().includes(filter))
+         .forEach((project) => {
             const game = document.createElement("a");
             game.href = project.link;
             game.className = "game-link container";
@@ -175,12 +173,13 @@
             </div>`;
             container.appendChild(game);
           });
-        }
-        const backToTopButton = document.getElementById('↑');
-        window.onscroll = function () {
-          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-            backToTopButton.style.display = "block";
-          } else {
+      }
+
+      const backToTopButton = document.getElementById('↑');
+      window.onscroll = function () {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+          backToTopButton.style.display = "block";
+        } else {
           backToTopButton.style.display = "none";
         }
       };
