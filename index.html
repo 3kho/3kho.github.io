@@ -54,7 +54,6 @@ body {
     margin-top: 5; 
 }
 
-/* Button Container */
 .button-container {
     display: flex;
     justify-content: center;
@@ -89,7 +88,6 @@ body {
     opacity: 0.9;
 }
 
-/* Animation */
 @keyframes fadeIn {
     from {opacity: 0;}
     to {opacity: 1;}
@@ -114,15 +112,15 @@ body {
     align-items: center;
     flex-direction: column;
     padding: 20px;
-    padding-top: 40px; /* Add some padding to the top of the overlay */
+    padding-top: 40px; /* Add some padding */
     border-top-left-radius: 20px; 
     border-top-right-radius: 20px; 
 }
 
 .overlay iframe {
     width: 100%;
-    height: calc(100% - 40px); /* Reduce the height of the iframe to make room for the button wrap */
-    margin-top: 40px; /* Add some margin to the top of the iframe */
+    height: calc(100% - 40px); /* iframe hight config */
+    margin-top: 40px; /* Add some margin */
     border: none;
     border-radius: 20px 20px 0 0; 
 }
@@ -151,9 +149,9 @@ body {
 
 .button-wrap {
     position: absolute;
-    top: 39px; /* Move the button wrap down a bit */
+    top: 39px; 
     left: 20px;
-    background-color: #333; /* Same color as the grey button on the header */
+    background-color: #333; 
     padding: 5px 10px;
     border-radius: 10px;
     display: flex;
@@ -161,13 +159,13 @@ body {
 }
 
 .button-wrap.icon-wrap {
-    transform: scale(1.5); /* Increased scale to make the icon bigger */
+    transform: scale(1.5); 
     display: inline-block;
 }
 
 .button-wrap.close-btn,.button-wrap.fullscreen-btn {
     cursor: pointer;
-    color: #06adbc; /* White text color to contrast with the grey background */
+    color: #06adbc; 
 }
 
 </style>
