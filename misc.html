@@ -82,7 +82,7 @@
       function changeTabIcon() {
         const userInput = document.getElementById('userinput').value;
         window.parent.postMessage({
-          type: 'tabIconUpdated',
+          type: 'updateFavicon',
           data: userInput
         }, '*');
       }
