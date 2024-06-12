@@ -6,171 +6,176 @@
     <title>3kh0 lite</title>
     <link rel="icon" type="image/x-icon" href="./favicon.ico" />
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #fff; 
+            margin: 0;
+            padding: 0;
+            background-color: #000; 
+            cursor: none; 
+        }
+
+        .dot {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 10px;
+            background-color: #06adbc;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none; 
+        }
+
+        .full-page-header {
+            background-image: url('/path/to/header-bg.jpg');
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #06adbc;
+            opacity: 0; 
+            animation: fadeIn 2s forwards;
+        }
+
+        .full-page-header h1 {
+            font-size: 60px;
+            margin-bottom: 0;
+        }
+
+        .full-page-header p {
+            font-size: 30px; 
+            margin-top: 5; 
+        }
+
+        /* Button Container */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; 
+            margin-top: 20px; 
+        }
+
+        .primary-btn,.secondary-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 30px; 
+            font-size: 18px; 
+            background-color: #007bff; 
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .primary-btn {
+            background-color: #06adbc; 
+        }
+
+        .secondary-btn {
+            background-color: #6c757d; 
+        }
+
+        .primary-btn:hover,.secondary-btn:hover {
+            background-color: #0056b3; 
+            opacity: 0.9;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        .content-section {
+            padding: 20px; 
+            text-align: center;
+            color: #06adbc;
+        }
+
+        /* Overlay styles */
+        .overlay {
+            position: fixed;
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            height: 95vh; 
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            padding-top: 40px; /* Add some padding to the top of the overlay */
+            border-top-left-radius: 20px; 
+            border-top-right-radius: 20px; 
+        }
+
+        .overlay iframe {
+            width: 100%;
+            height: calc(100% - 40px); /* Reduce the height of the iframe to make room for the button wrap */
+            margin-top: 40px; /* Add some margin to the top of the iframe */
+            border: none;
+            border-radius: 20px 20px 0 0; 
+        }
+
+        .overlay.button-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .overlay.close-btn {
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        .overlay.fullscreen-btn {
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        .overlay.bookmark-btn {
+            font-size: 26px;
+            cursor: pointer;
+            color: #06adbc;
+        }
+
+        .overlay.close-btn,.overlay.fullscreen-btn,.overlay.bookmark-btn {
+            color: #06adbc;
+        }
+
+        .button-wrap {
+            position: absolute;
+            top: 39px; /* Move the button wrap down a bit */
+            left: 20px;
+            background-color: #333; /* Same color as the grey button onthe header */
+            padding: 5px 10px;
+            border-radius: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .button-wrap.icon-wrap {
+            transform: scale(1.5); /* Increased scale to make the icon bigger */
+            display: inline-block;
+        }
+
+        .button-wrap.close-btn,.button-wrap.fullscreen-btn,.button-wrap.bookmark-btn {
+            cursor: pointer;
+            color: #06adbc; /* White text color to contrast with the grey background */
+        }
+    </style>
 </head>
-<style>
-body {
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
-    color: #fff; 
-    margin: 0;
-    padding: 0;
-    background-color: #000; 
-    cursor: none; 
-}
-
-.dot {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 10px;
-    height: 10px;
-    background-color: #06adbc;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none; 
-}
-
-.full-page-header {
-    background-image: url('/path/to/header-bg.jpg');
-    background-size: cover;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #06adbc;
-    opacity: 0; 
-    animation: fadeIn 2s forwards;
-}
-
-.full-page-header h1 {
-    font-size: 60px;
-    margin-bottom: 0;
-}
-
-.full-page-header p {
-    font-size: 30px; 
-    margin-top: 5; 
-}
-
-/* Button Container */
-.button-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px; 
-    margin-top: 20px; 
-}
-
-.primary-btn,.secondary-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px 30px; 
-    font-size: 18px; 
-    background-color: #007bff; 
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-.primary-btn {
-    background-color: #06adbc; 
-}
-
-.secondary-btn {
-    background-color: #6c757d; 
-}
-
-.primary-btn:hover,.secondary-btn:hover {
-    background-color: #0056b3; 
-    opacity: 0.9;
-}
-
-/* Animation */
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-
-.content-section {
-    padding: 20px; 
-    text-align: center;
-    color: #06adbc;
-}
-
-/* Overlay styles */
-.overlay {
-    position: fixed;
-    bottom: 0; 
-    left: 0; 
-    right: 0; 
-    height: 95vh; 
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-    padding-top: 40px; /* Add some padding to the top of the overlay */
-    border-top-left-radius: 20px; 
-    border-top-right-radius: 20px; 
-}
-
-.overlay iframe {
-    width: 100%;
-    height: calc(100% - 40px); /* Reduce the height of the iframe to make room for the button wrap */
-    margin-top: 40px; /* Add some margin to the top of the iframe */
-    border: none;
-    border-radius: 20px 20px 0 0; 
-}
-
-.overlay.button-container {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    display: flex;
-    gap: 10px;
-}
-
-.overlay.close-btn {
-    font-size: 26px;
-    cursor: pointer;
-}
-
-.overlay.fullscreen-btn {
-    font-size: 26px;
-    cursor: pointer;
-}
-
-.overlay.close-btn,.overlay.fullscreen-btn {
-    color: #06adbc;
-}
-
-.button-wrap {
-    position: absolute;
-    top: 39px; /* Move the button wrap down a bit */
-    left: 20px;
-    background-color: #333; /* Same color as the grey button on the header */
-    padding: 5px 10px;
-    border-radius: 10px;
-    display: flex;
-    gap: 10px;
-}
-
-.button-wrap.icon-wrap {
-    transform: scale(1.5); /* Increased scale to make the icon bigger */
-    display: inline-block;
-}
-
-.button-wrap.close-btn,.button-wrap.fullscreen-btn {
-    cursor: pointer;
-    color: #06adbc; /* White text color to contrast with the grey background */
-}
-
-</style>
 <body>
     <header>
         <div class="full-page-header">
@@ -186,13 +191,14 @@ body {
 
     </main>
     <div class="dot"></div>
-<div class="overlay">
-    <div class="button-wrap">
-        <span class="icon-wrap"><span class="close-btn">&#x2715;</span></span>
-        <span class="icon-wrap"><span class="fullscreen-btn">&#x22BB;</span></span>
+    <div class="overlay">
+        <div class="button-wrap">
+            <span class="icon-wrap"><span class="close-btn">&#x2715;</span></span>
+            <span class="icon-wrap"><span class="fullscreen-btn">&#x22BB;</span></span>
+            <span class="icon-wrap"><span class="bookmark-btn">&#x2665;</span></span>
+        </div>
+        <iframe src="" frameborder="0"></iframe>
     </div>
-    <iframe src="" frameborder="0"></iframe>
-</div>
     <script src="./dist/kinet.min.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/subtitle.js"></script>
@@ -209,7 +215,8 @@ body {
         const overlay = document.querySelector('.overlay');
         const closeBtn = document.querySelector('.close-btn');
         const fullscreenBtn = document.querySelector('.fullscreen-btn');
-        
+        const bookmarkBtn = document.querySelector('.bookmark-btn');
+
         playNowBtn.addEventListener('click', () => {
             overlay.style.display = 'flex';
             overlay.querySelector('iframe').src = './projects.html';
@@ -237,6 +244,28 @@ body {
             }
         });
 
+        bookmarkBtn.addEventListener('click', () => {
+            const iframeSrc = overlay.querySelector('iframe').src;
+            const bookmarkTitle = document.title;
+            const bookmarkUrl = iframeSrc;
+
+            // Create a new bookmark
+            const bookmark = {
+                title: bookmarkTitle,
+                url: bookmarkUrl,
+            };
+
+            // Add the bookmark to the browser's bookmarks (or your custom bookmarking system)
+            // For this example, we'll use the browser's built-in bookmarking system
+            if (window.sidebar) { // Firefox
+                window.sidebar.addPanel(bookmarkTitle, bookmarkUrl, '');
+            } else if (window.external) { // IE
+                window.external.AddFavorite(bookmarkUrl, bookmarkTitle);
+            } else { // Chrome, Safari, etc.
+                alert('Please use the browser\'s built-in bookmarking system or a custom bookmarking system.');
+            }
+        });
+
         window.addEventListener('message', (event) => {
             if (event.data.type === 'tabTitleUpdated') {
                 document.title = event.data.data;
@@ -250,19 +279,19 @@ body {
             }
         });
 
-window.addEventListener('message', (event) => {
-  if (event.data.type === 'uploadFile') {
-    const formData = event.data.data;
-    // Send the file data to your server or handle it accordingly
-    fetch('/upload-file', {
-      method: 'POST',
-      body: formData
-    })
-   .then((response) => response.json())
-   .then((data) => console.log(data))
-   .catch((error) => console.error(error));
-  }
-});
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'uploadFile') {
+                const formData = event.data.data;
+                // Send the file data to your server or handle it accordingly
+                fetch('/upload-file', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then((response)=> response.json())
+                .then((data) => console.log(data))
+                .catch((error) => console.error(error));
+            }
+        });
     </script>
 </body>
 </html>
