@@ -35,40 +35,31 @@
       button:hover {
         background-color: #06adbc;
       }
-.game-link {
-  display: inline-block;
-  margin: 10px;
-  width: 210px; /* adjust the width to your liking */
-  height: 50px; /* adjust the height to your liking */
-  border-radius: 20px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  display: flex; /* add this */
-  align-items: center; /* add this */
-  justify-content: center; /* add this */
-  padding: 10px; /* add this */
-}
-
-.game-tile {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0; /* remove padding */
-}
-
-.game-icon {
-  width: 50px; /* adjust the width to your liking */
-  height: 50px; /* adjust the height to your liking */
-  border-radius: 10px;
-  margin-right: 10px;
-}
-
-.game-title {
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-  margin: 0; /* remove margin */
-}
+     .game-link {
+        display: inline-block;
+        margin: 10px;
+        width: 210px; /* adjust the width to your liking */
+        height: 50px; /* adjust the height to your liking */
+        border-radius: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+      }
+     .game-tile {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0;
+      }
+     .game-icon {
+        width: 50px; /* adjust the width to your liking */
+        height: 50px; /* adjust the height to your liking */
+        border-radius: 10px;
+        margin-right: 10px;
+      }
      .flex-container {
         display: flex;
         flex-direction: row;
@@ -149,8 +140,8 @@
     <script>
       let games = [];
       fetch("config/games.json")
-  .then((response) => response.json())
-  .then((data) => {
+ .then((response) => response.json())
+ .then((data) => {
         games = data;
         const container = document.getElementById("game-container");
         data.forEach((project) => {
@@ -160,13 +151,12 @@
             game.innerHTML = `
             <div class="game-tile">
               <img class="game-icon" src="${project.imgSrc}" alt="icon" style="cursor: pointer;" />
-              <p class="game-title">${project.title}</p>
-              </div>`;
+            </div>`;
               container.appendChild(game);
           });
           document.getElementById("loader").style.display = "none";
         })
-    .catch((error) => console.error("Error:", error));
+   .catch((error) => console.error("Error:", error));
 
       function searchGames() {
         const input = document.getElementById("search");
@@ -174,16 +164,15 @@
         const container = document.getElementById("game-container");
         container.innerHTML = "";
         games
-      .filter((game) => game.title.toUpperCase().includes(filter))
-      .forEach((project) => {
+     .filter((game) => game.title.toUpperCase().includes(filter))
+     .forEach((project) => {
             const game = document.createElement("a");
             game.href = project.link;
             game.className = "game-link container";
             game.innerHTML = `
             <div class="game-tile">
               <img class="game-icon" src="${project.imgSrc}" alt="icon" loading="lazy" style="cursor: pointer;" />
-              <p class="game-title">${project.title}</p>
-              </div>`;
+            </div>`;
             container.appendChild(game);
           });
         }
