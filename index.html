@@ -250,13 +250,19 @@ body {
             }
         });
 
-        window.addEventListener('message', (event) => {
-        if (event.data.type === 'updateFavicon') {
-       const faviconUrl = event.data.data;
-       const faviconLink = document.querySelector('link[rel="icon"]');
-       faviconLink.href = faviconUrl;
-      }
- });
+window.addEventListener('message', (event) => {
+  if (event.data.type === 'uploadFile') {
+    const formData = event.data.data;
+    // Send the file data to your server or handle it accordingly
+    fetch('/upload-file', {
+      method: 'POST',
+      body: formData
+    })
+   .then((response) => response.json())
+   .then((data) => console.log(data))
+   .catch((error) => console.error(error));
+  }
+});
     </script>
 </body>
 </html>
