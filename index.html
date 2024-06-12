@@ -190,7 +190,7 @@ body {
     <div class="button-wrap">
         <span class="icon-wrap"><span class="close-btn">&#x2715;</span></span>
         <span class="icon-wrap"><span class="fullscreen-btn">&#x22BB;</span></span>
-        <span class="icon-wrap"><span class="bookmark-btn" onclick="javascript:window.external.AddFavorite(location.href, document.title);">&#x2665;</span></span>
+        <span class="bookmark-btn" onclick="javascript:window.external.AddFavorite(document.querySelector('iframe').contentWindow.location.href, document.querySelector('iframe').contentWindow.document.title);">&#x2665;</span>
     </div>
     <iframe src="" frameborder="0"></iframe>
 </div>
