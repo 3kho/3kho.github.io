@@ -249,6 +249,14 @@ body {
             } else if (event.data.type === 'tabSettingsReset') {
             }
         });
+
+        window.addEventListener('message', (event) => {
+        if (event.data.type === 'updateFavicon') {
+       const faviconUrl = event.data.data;
+       const faviconLink = document.querySelector('link[rel="icon"]');
+       faviconLink.href = faviconUrl;
+      }
+ });
     </script>
 </body>
 </html>
